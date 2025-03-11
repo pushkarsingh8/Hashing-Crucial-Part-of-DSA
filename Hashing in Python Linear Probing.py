@@ -63,6 +63,10 @@ class Dictionary:
         
         
         
-    
-    
-          
+D1 = Dictionary(3)
+
+D1.put(53,"Hello") # 2 Index/Pos
+D1.put(25,"Pushkar") #1 Index/Pos
+
+print(D1.slots)
+print(D1.data)
