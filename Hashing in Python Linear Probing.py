@@ -44,7 +44,52 @@ class Dictionary:
                 #Second When key already Exist in an Array    
                 else:
                     self.slots[new_hash_value] = key
-                    
+              
+              
+              
+    def __setitem__(self,key,value):
+        return self.put(key,value)  
+    
+    
+    
+    
+    def get(self,key):
+        start_position = self.hash_function(key)
+        current_position = start_position
+        
+        
+        
+        while self.slots[current_position] != None:
+            
+            
+            
+            if self.slots[current_position] == key:                
+                return self.data[current_position]
+            
+            current_position = self.rehashing(current_position)
+            
+            
+            if current_position == start_position:
+                return "Not Found"
+            
+            
+        return "Not Found"
+    
+    
+    
+    def __getitem__(self,key):
+        return self.get(key)
+    
+    
+    
+
+                
+
+        
+        
+        
+        
+                          
                     
                             
                 
@@ -65,8 +110,11 @@ class Dictionary:
         
 D1 = Dictionary(3)
 
-D1.put(53,"Hello") # 2 Index/Pos
-D1.put(25,"Pushkar") #1 Index/Pos
+D1["Pushkar"] = 53 # 0 Index/Pos
+D1 ["Python"] = 45 #1 Index/Pos
 
 print(D1.slots)
 print(D1.data)
+
+
+print(D1["Python"])
