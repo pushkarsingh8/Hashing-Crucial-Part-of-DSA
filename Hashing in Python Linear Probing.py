@@ -13,6 +13,7 @@ class Dictionary:
         
         #postion is Empty
         if self.slots[hash_value] == None:
+            
             self.slots[hash_value] = key
             self.data[hash_value] = value
             
@@ -81,13 +82,18 @@ class Dictionary:
         return self.get(key)
     
     
+    def __str__(self):
+        
+        for i in range(len(self.slots)):
+            if self.slots[i] != None:
+                print(self.slots[i],":",self.data[i],end=" ")
+                
+                
+        return ""
+                
+    
     
 
-                
-
-        
-        
-        
         
                           
                     
@@ -113,8 +119,10 @@ D1 = Dictionary(3)
 D1["Pushkar"] = 53 # 0 Index/Pos
 D1 ["Python"] = 45 #1 Index/Pos
 
-print(D1.slots)
-print(D1.data)
+# print(D1.slots)
+# print(D1.data)
+
+print(D1)
 
 
 print(D1["Python"])
