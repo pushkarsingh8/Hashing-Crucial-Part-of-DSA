@@ -41,6 +41,18 @@ class Dictionary:
                 self.data[new_hashvalue] = value
 
 
+    def __str__(self):
+
+        for i in range(len(self.slots)):
+            if self.slots[i] != None:
+                print(self.slots[i],":",self.data[i],end=" ")
+
+
+        return ""
+
+
+        
+
 
     def __setitem__(self,key,value):
 
@@ -103,3 +115,4 @@ print(d1.data)
 
 print(d1.get("hello"))
 
+print(d1)
