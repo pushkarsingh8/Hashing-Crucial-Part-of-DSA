@@ -74,7 +74,7 @@ class Dictionary:
 
             if self.slots[current_position] == key:
 
-                return self.data[current_position]
+                print( self.data[current_position])
 
 
             current_position = self.rehash(current_position,i)
@@ -82,7 +82,7 @@ class Dictionary:
 
             if current_position == start_position:
 
-                return "Not Found"  
+                print( "Not Found")  
 
         return "Not Found" #when None is available in dictionary
 
@@ -109,12 +109,10 @@ d1 = Dictionary(4)
 d1["hello"] = 45
 d1["pushkar"] = 26
 
+d1["Rice Eat Wants"] = 55
 
-print(d1.slots)
+d1.get("rice")
+d1.get("hello")
 
 
-print(d1.data)
-
-print(d1.get("hello"))
-
-print(d1) 
+# print(d1) 
