@@ -23,11 +23,12 @@ class Dictionary:
 
 
             #if already occupied position another item
-            new_hashvalue = self.rehash(hash_value)
+            i = 1
+            new_hashvalue = self.rehash(hash_value,i)
 
             while self.slots[new_hashvalue] != None and self.slots[new_hashvalue] == key:
-
-                new_hashvalue = self.rehash(hash_value)
+                i+=1
+                new_hashvalue = self.rehash(hash_value,i)
 
 
             if self.slots[new_hashvalue] == None:
@@ -63,6 +64,7 @@ class Dictionary:
     def get(self,key):
 
         start_position = self.hash_function(key)
+        i = 1
 
         current_position = start_position
 
@@ -75,8 +77,8 @@ class Dictionary:
                 return self.data[current_position]
 
 
-            current_position = self.rehash(current_position)
-
+            current_position = self.rehash(current_position,i)
+            i+=1
 
             if current_position == start_position:
 
@@ -91,9 +93,9 @@ class Dictionary:
         return abs(hash(key)) % self.size
     
 
-    def rehash(self,old_hashvalue):
+    def rehash(self,old_hashvalue,i):
 
-        return (old_hashvalue + 1) % self.size
+        return (old_hashvalue + i**2) % self.size
     
 
 
@@ -115,4 +117,4 @@ print(d1.data)
 
 print(d1.get("hello"))
 
-print(d1)
+print(d1) 
