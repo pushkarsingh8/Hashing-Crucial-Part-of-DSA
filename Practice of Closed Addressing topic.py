@@ -23,6 +23,9 @@ class linked_list:
                 temp = temp.next
 
             temp.next = new_node
+
+
+    
     
     def remove(self,key):
         if self.head.key == key:
@@ -43,6 +46,9 @@ class linked_list:
         else:
             temp.next = temp.next.next
 
+        temp = temp.next
+
+
     def search(self,key):
         if self.head == None:
             return None
@@ -55,7 +61,7 @@ class linked_list:
             indc+=1
 
         if temp == None:
-            return "key not found"
+            return -1
         else:
             #returning index where key have position
             return indc
@@ -68,18 +74,138 @@ class linked_list:
         temp = self.head
         while temp!=None:
             print(temp.key,"->",temp.value)
-
             temp = temp.next
 
 
+    def get_node(self,index):
+        count = 0
+        temp = self.head
+        while temp!=None:
+            if count == index:
+                return temp
+            #returning a node where key exist
 
-l = linked_list()
+            temp = temp.next
+            count+=1
 
-l.add(2,3)
-l.add(4,3)
-l.add(2,3)
-l.remove(2)
-l.display()
-print(l.search(2))
+        return None
+
+
+
+
+
+
+
+class Dictionary:
+    def __init__(self,capacity):
+        self.capacity = capacity
+        self.size = 0
+
+
+        self.buckets = self.make_array(self.capacity)
+    
+    def make_array(self,capacity):
+        l = []
+
+        for i in range(capacity):
+            l.append(linked_list())
+        
+        return l
+        
+
+    def get_node_index(self,bucket_idx,key):
+
+        node_idx = self.buckets[bucket_idx].search(key)
+        
+        return node_idx
+    
+    
+    # def __setitem__(self,key,value):
+    #     return self.put(key,value)
+    
+
+
+    def put(self,key,value):
+        bucket_idx = self.hash_funct(key) #generate hash value
+        
+        node_idx =  self.get_node_index(bucket_idx,key) 
+
+        #inserting..
+        if node_idx == -1:
+            self.buckets[self.bucket_idx].add(key,value)#we use linked list method to store key,value
+            self.size+=1
+        else:
+            #update
+            node = self.buckets[bucket_idx].get_node_index(node_idx)
+            node.value = value
+
+
+            
+
+
+
+
+
+
+    def hash_funct(self,key):
+        return abs(hash(key)) % self.capacity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d1 = Dictionary(4)
+d1.put("hey",5)
+# d1["hey"] = 5
+d1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
