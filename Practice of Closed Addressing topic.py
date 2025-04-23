@@ -50,22 +50,19 @@ class linked_list:
 
 
     def search(self,key):
-        if self.head == None:
-            return None
+        
         temp = self.head
         indc = 0
+
         while temp!=None:
             if temp.key == key:
-                break
+                return indc
             temp = temp.next
             indc+=1
 
-        if temp == None:
-            return -1
-        else:
-            #returning index where key have position
-            return indc
-
+    
+        return -1
+        
 
 
     def display(self):
@@ -120,8 +117,7 @@ class Dictionary:
         return node_idx
     
     
-    # def __setitem__(self,key,value):
-    #     return self.put(key,value)
+    
     
 
 
@@ -132,12 +128,14 @@ class Dictionary:
 
         #inserting..
         if node_idx == -1:
-            self.buckets[self.bucket_idx].add(key,value)#we use linked list method to store key,value
+            self.buckets[bucket_idx].add(key,value)#we use linked list method to store key,value
             self.size+=1
         else:
             #update
-            node = self.buckets[bucket_idx].get_node_index(node_idx)
-            node.value = value
+            node = self.buckets[bucket_idx].get_node(node_idx)
+            if node:
+
+                node.value = value
 
 
             
@@ -149,6 +147,22 @@ class Dictionary:
 
     def hash_funct(self,key):
         return abs(hash(key)) % self.capacity
+    
+
+
+    def __str__(self):
+        result = ""
+
+        for i in range(self.capacity):
+             temp = self.buckets[i].head
+
+             while temp!=None:
+                result += f"{temp.key}-->{temp.value}\n"
+                temp = temp.next
+
+
+        return result.strip()
+
 
 
 
@@ -169,8 +183,10 @@ class Dictionary:
 
 d1 = Dictionary(4)
 d1.put("hey",5)
+d1.put("sdhy",5)
+d1.put("sffghey",5)
 # d1["hey"] = 5
-d1 
+print(d1)
 
 
 
