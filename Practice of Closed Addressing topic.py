@@ -28,29 +28,28 @@ class linked_list:
     
     
     def remove(self,key):
+        if self.head == None:
+            return None
+        
         if self.head.key == key:
             self.head = self.head.next
             return
-        if self.head == None:
-            return None
         
 
         temp = self.head
 
-        while temp!=None:
-            if temp.key == key:
-                break
+        while temp.next!=None:
+            if temp.next.key == key:
+                temp.next = temp.next.next
+                return
 
-        if temp == None:
-            return "Key Not found"
-        else:
-            temp.next = temp.next.next
+            temp = temp.next
 
-        temp = temp.next
+        return "Key Not found"
 
+        
 
     def search(self,key):
-        
         temp = self.head
         indc = 0
 
@@ -143,6 +142,13 @@ class Dictionary:
     
 
 
+
+
+    def __setitem__(self,key,value):
+        return self.put(key,value)
+    
+
+
     def __str__(self):
         result = ""
 
@@ -155,6 +161,20 @@ class Dictionary:
 
 
         return result.strip()
+    
+
+
+    def get(self,key):
+        bucket_idx = self.hash_funct(key) #generate hashvalue
+        idx = self.buckets[bucket_idx].search(key) #get index based on hashvalue find in a list
+        if idx == -1: #if not find a key in linked list 
+            return None
+        node = self.buckets[bucket_idx].get_node(idx) #if found a key so return a node by get_node function
+        if node :
+            return node.value
+        return None
+    
+
 
 
 
@@ -177,14 +197,16 @@ class Dictionary:
 d1 = Dictionary(4)
 
 
-d1.put("hey",5)
-d1.put("sdhy",5)
-d1.put("sffghey",5)
+d1["pushkar"] = 23 
 
-d1.buckets[1].display()
+d1["Thakur"] = 19
+
+d1["petrol"] = 27
+
+d1["kingdom"] = 36
 
 
-
+print(d1.get("pushkar"))
 
 
 
