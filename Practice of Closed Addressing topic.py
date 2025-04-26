@@ -50,6 +50,7 @@ class linked_list:
         
 
     def search(self,key):
+        #it' return index when key found
         temp = self.head
         indc = 0
 
@@ -166,7 +167,7 @@ class Dictionary:
 
     def get(self,key):
         bucket_idx = self.hash_funct(key) #generate hashvalue
-        idx = self.buckets[bucket_idx].search(key) #get index based on hashvalue find in a list
+        idx = self.get_node_index(bucket_idx,key) #get index based on hashvalue find in a list
         if idx == -1: #if not find a key in linked list 
             return None
         node = self.buckets[bucket_idx].get_node(idx) #if found a key so return a node by get_node function
@@ -180,21 +181,7 @@ class Dictionary:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-d1 = Dictionary(4)
+d1 = Dictionary(4) #object d1
 
 
 d1["pushkar"] = 23 
