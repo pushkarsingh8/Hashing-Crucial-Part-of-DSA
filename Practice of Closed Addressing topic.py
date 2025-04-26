@@ -138,13 +138,6 @@ class Dictionary:
                 node.value = value
 
 
-            
-
-
-
-
-
-
     def hash_funct(self,key):
         return abs(hash(key)) % self.capacity
     
@@ -157,7 +150,7 @@ class Dictionary:
              temp = self.buckets[i].head
 
              while temp!=None:
-                result += f"{temp.key}-->{temp.value}\n"
+                result += f"{temp.key} --> {temp.value}\n"
                 temp = temp.next
 
 
@@ -182,12 +175,13 @@ class Dictionary:
 
 
 d1 = Dictionary(4)
+
+
 d1.put("hey",5)
 d1.put("sdhy",5)
 d1.put("sffghey",5)
-# d1["hey"] = 5
-print(d1)
 
+d1.buckets[1].display()
 
 
 
