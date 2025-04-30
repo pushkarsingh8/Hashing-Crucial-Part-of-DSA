@@ -74,6 +74,14 @@ class linked_list:
             temp = temp.next
 
 
+    def size(self):
+        temp = self.head
+        counter = 0
+        while temp!=None:
+            counter+=1
+            temp = temp.next
+        return counter
+
     def get_node(self,index):
         count = 0
         temp = self.head
@@ -98,7 +106,6 @@ class Dictionary:
         self.capacity = capacity
         self.size = 0
 
-
         self.buckets = self.make_array(self.capacity)
     
     def make_array(self,capacity):
@@ -115,11 +122,8 @@ class Dictionary:
         node_idx = self.buckets[bucket_idx].search(key)
         
         return node_idx
-    
-    
-    
-    
 
+    
 
     def put(self,key,value):
         bucket_idx = self.hash_funct(key) #generate hash value
@@ -134,8 +138,35 @@ class Dictionary:
             #update
             node = self.buckets[bucket_idx].get_node(node_idx)
             if node:
-
                 node.value = value
+
+        #when size and capacity are greater then two So True and double the array
+        load_factor = (self.size+1)/self.capacity
+        if load_factor > 2:
+
+            self.rehash()
+            print(load_factor)
+
+
+
+
+
+    def rehash(self):
+        self.capacity = self.capacity*2
+        self.size = 0
+        old_array = self.buckets
+        #contain several array and i double it
+        self.buckets = self.make_array(self.capacity) #new arrays maked
+        
+        for i in old_array: #it's traverse each array 
+            for j in range(i.size()):
+                node = i.get_node(j)
+                key_item = node.key
+                value_item = node.value
+                self.put(key_item,value_item)
+
+                
+
 
 
     def hash_funct(self,key):
@@ -181,19 +212,25 @@ class Dictionary:
 
 
 
-d1 = Dictionary(4) #object d1
+d1 = Dictionary(2) #object d1
+
+ 
+d1.put("rygh",23) 
+
+d1.put("python",23)
+
+d1.put("c",23)
+
+d1.put("java",23)
+
+d1["hey"] = 63
+
+d1["She"] = 63
+print(d1.buckets) #it's make 4 linked list
 
 
-d1["pushkar"] = 23 
-
-d1["Thakur"] = 19
-
-d1["petrol"] = 27
-
-d1["kingdom"] = 36
 
 
-print(d1.get("pushkar"))
 
 
 
