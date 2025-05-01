@@ -23,8 +23,6 @@ class linked_list:
                 temp = temp.next
 
             temp.next = new_node
-
-
     
     
     def remove(self,key):
@@ -115,6 +113,9 @@ class Dictionary:
             l.append(linked_list())
         
         return l
+    
+    def __len__(self):
+        return self.size
         
 
     def get_node_index(self,bucket_idx,key):
@@ -143,9 +144,8 @@ class Dictionary:
         #when size and capacity are greater then two So True and double the array
         load_factor = (self.size+1)/self.capacity
         if load_factor > 2:
-
             self.rehash()
-            print(load_factor)
+        # print(load_factor)
 
 
 
@@ -165,14 +165,21 @@ class Dictionary:
                 value_item = node.value
                 self.put(key_item,value_item)
 
-                
-
 
 
     def hash_funct(self,key):
         return abs(hash(key)) % self.capacity
     
 
+    def __delitem__(self,key):
+        if self.size != 0:    
+            bucket_idx = self.hash_funct(key)
+            res = self.buckets[bucket_idx].remove(key)
+            if res != "Key Not found":
+                self.size -= 1
+                return
+
+        return "Not Found"
 
 
 
@@ -195,12 +202,17 @@ class Dictionary:
         return result.strip()
     
 
+    def __getitem__(self,key):
+        return self.get(key)
+
+    
+
 
     def get(self,key):
         bucket_idx = self.hash_funct(key) #generate hashvalue
         node_idx= self.get_node_index(bucket_idx,key) #get index based on hashvalue find in a list
         if node_idx == -1: #if not find a key in linked list 
-            return None
+            return "Not Found"
         node = self.buckets[bucket_idx].get_node(node_idx) #if found a key so return a node by get_node function
         if node :
             return node.value
@@ -212,23 +224,24 @@ class Dictionary:
 
 
 
-d1 = Dictionary(2) #object d1
+d1 = Dictionary(4) #object d1
 
  
-d1.put("rygh",23) 
+d1["Python"] = 36
+d1["java"] = 52
+d1["C"] = 42
+d1["Ruby"] = 23
+d1["king"] = 49
+d1["queen"] = 21
+d1["joker"] = 63
+d1["bear"] = 99
 
-d1.put("python",23)
+del d1["joker"]
 
-d1.put("c",23)
+print(d1)
+print(d1["bear"]) #get value based on key by use get function
 
-d1.put("java",23)
-
-d1["hey"] = 63
-
-d1["She"] = 63
-print(d1.buckets) #it's make 4 linked list
-
-
+print(len(d1)) 
 
 
 
