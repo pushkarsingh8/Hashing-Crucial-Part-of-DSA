@@ -63,9 +63,9 @@ class linked_list:
         
 
 
-    def display(self):
+    def traverse(self):
         if self.head == None:
-            print("Nothing is here")
+            return None
         temp = self.head
         while temp!=None:
             print(temp.key,"->",temp.value)
@@ -186,21 +186,21 @@ class Dictionary:
     def __setitem__(self,key,value):
         return self.put(key,value)
     
-
-
     def __str__(self):
         result = ""
-
         for i in range(self.capacity):
-             temp = self.buckets[i].head
-
-             while temp!=None:
-                result += f"{temp.key} --> {temp.value}\n"
+            
+            temp = self.buckets[i].head
+            
+            while temp!=None:
+                
+                result += f"{temp.key} : {temp.value}\n"
                 temp = temp.next
+                
+        return  result.strip()
 
 
-        return result.strip()
-    
+
 
     def __getitem__(self,key):
         return self.get(key)
